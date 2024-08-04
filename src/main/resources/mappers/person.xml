@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ureca.person.model.dao.PersonDAO">
+ 
+  <insert id="insert" parameterType="Person">
+    insert into person (name, calorie, best, photoFilename) 
+    values (#{name}, #{calorie}, #{best}, #{photoFilename})
+  </insert>
+  
+  <update id="update" parameterType="Person">
+    update person set calorie=#{calorie}, best=#{best}, photoFilename=#{photoFilename} where no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from person where no=#{no}
+  </delete>
+  
+  <select id="select" parameterType="int" resultType="Person">
+    select no, name, calorie, best, photoFilename from person where no=#{no}
+  </select>
+  
+  <select id="selectAll" resultType="Person">
+    select no, name, calorie, best, photoFilename from person
+  </select>
+  
+  <!-- Modified selectRandomFlavors query -->
+  <select id="selectRandomFlavors" parameterType="int" resultType="Person">
+    SELECT * FROM person
+    ORDER BY RAND()
+    LIMIT #{count}
+ </select>
+
+</mapper>
